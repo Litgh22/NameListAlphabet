@@ -14,7 +14,8 @@ void draw() {
     textSize(30);
     text(newName, width/2, height/2);
     textSize(20);
-    text("Click to add", width/2, height/1.5);
+    text("Click here to add", width/2, height/1.5);
+    text("Enter to order", width/2, height/1.3);
   } else {
     text(nameString, width/2, height/2);
   }
@@ -28,7 +29,7 @@ void keyPressed() {
     newName+=key;
   } else if (key == BACKSPACE) {
     if (newName.length()>0)newName = newName.substring(0, newName.length()-1);
-  } else {
+  } else if ((key == RETURN || key == ENTER) && state == 0) {
     names = sort(names);
     for (int i = 0; i < names.length; i++) {
       nameString += names[i]+"\n";
@@ -38,7 +39,7 @@ void keyPressed() {
 }
 
 void mousePressed() {
-  if (mouseY > height/1.8) {
+  if (mouseY > height/1.8 && mouseY < height/1.3 && newName != "") {
     names = expand(names, names.length+1);
     names[names.length-1] = newName;
     newName = "";
